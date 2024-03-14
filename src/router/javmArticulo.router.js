@@ -4,8 +4,8 @@ const rutaArticulo = Router();
 
 rutaArticulo.get('/javmListar',listarArticulo);
 rutaArticulo.post('/javmRegistrar',registrarArticulo);
-rutaArticulo.put('/javmActualizar/:id',actualizarArticulo);
 rutaArticulo.get('/javmBuscar/:id',buscarArticulo);
+rutaArticulo.put('/javmActualizar/:id',actualizarArticulo);
 rutaArticulo.patch('/javmDesativar/:id',desactivarArticulo);
 rutaArticulo.patch('/javmActivar/:id',activarArticulo);
 

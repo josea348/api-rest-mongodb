@@ -4,8 +4,8 @@ const rutaCliente = Router();
 
 rutaCliente.get('/javmListar',listarCliente);
 rutaCliente.post('/javmRegistrar',registrarCliente);
-rutaCliente.put('/javmActualizar/:id',actualizarCliente);
 rutaCliente.get('/javmBuscar/:id',buscarCliente);
+rutaCliente.put('/javmActualizar/:id',actualizarCliente);
 rutaCliente.patch('/javmDesactivar/:id',desactivarCliente);
 rutaCliente.patch('/javmActivar/:id',activarCliente);
 

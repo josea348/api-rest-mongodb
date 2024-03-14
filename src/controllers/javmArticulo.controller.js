@@ -37,6 +37,19 @@ export const registrarArticulo = async (req, res) => {
     }
 }
 
+export const buscarArticulo = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const buscaArticulo = await Articulo.findById(id);
+
+        if(buscaArticulo) return res.status(200).json(buscaArticulo);
+        else return res.status(404).json({'status': 404, 'message': 'No se actualizo el articulo.'});
+    } catch (e) {
+        res.status(500).json({'status': 500, 'message': 'Error. '+e});
+    }
+}
+
 export const actualizarArticulo = async (req, res) => {
     try {
         /* const error = validationResult(req);
@@ -54,19 +67,6 @@ export const actualizarArticulo = async (req, res) => {
         
         const save = await actualizaArticulo.save();
         if(save) return res.status(200).json({'status': 200, 'message': 'Se actualizo el articulo.'});
-        else return res.status(404).json({'status': 404, 'message': 'No se actualizo el articulo.'});
-    } catch (e) {
-        res.status(500).json({'status': 500, 'message': 'Error. '+e});
-    }
-}
-
-export const buscarArticulo = async (req, res) => {
-    try {
-        const { id } = req.params;
-
-        const buscaArticulo = await Articulo.findById(id);
-
-        if(buscaArticulo) return res.status(200).json(buscaArticulo);
         else return res.status(404).json({'status': 404, 'message': 'No se actualizo el articulo.'});
     } catch (e) {
         res.status(500).json({'status': 500, 'message': 'Error. '+e});

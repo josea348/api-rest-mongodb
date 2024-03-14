@@ -39,6 +39,19 @@ export const registrarCliente = async (req, res) => {
     }
 }
 
+export const buscarCliente = async (req, res) => {
+    try {
+        const { id } = req.params;
+        
+        const buscaCliente = await Cliente.findById(id);
+        
+        if(buscaCliente) return res.status(200).json(buscaCliente);
+        else return res.status(404).json({'status': 404, 'message': `No se encontró el cliente con el ID ${id}.`});
+    } catch (e) {
+        res.status(500).json({'status': 500, 'message': 'Error. '+e});
+    }
+}
+
 export const actualizarCliente = async (req, res) => {
     try {
         /* const error = validationResult(req);
@@ -60,19 +73,6 @@ export const actualizarCliente = async (req, res) => {
         const save = await actualizaCliente.save();
         if(save) return res.status(200).json({'status': 200, 'message': 'Se actualizó el cliente.'});
         else return res.status(404).json({'status': 404, 'message': `No se encontró o no se actalizó el cliente con el ID ${id}.`});
-    } catch (e) {
-        res.status(500).json({'status': 500, 'message': 'Error. '+e});
-    }
-}
-
-export const buscarCliente = async (req, res) => {
-    try {
-        const { id } = req.params;
-
-        const buscaCliente = await Cliente.findById(id);
-
-        if(buscaCliente) return res.status(200).json(buscaCliente);
-        else return res.status(404).json({'status': 404, 'message': `No se encontró el cliente con el ID ${id}.`});
     } catch (e) {
         res.status(500).json({'status': 500, 'message': 'Error. '+e});
     }

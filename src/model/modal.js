@@ -37,7 +37,7 @@ const interesSchema = new mongoose.Schema({
     estado: Boolean
 })
 
-export const Articulo = mongoose.model('Articulo',articuloSchema);
 export const Cliente = mongoose.model('Cliente',clienteSchema);
+export const Articulo = mongoose.model('Articulo',articuloSchema);
 export const Alquiler = mongoose.model('Alquiler',alquilerSchema);
 export const Interes = mongoose.model('Interes',interesSchema);

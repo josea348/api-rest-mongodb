@@ -17,10 +17,10 @@ export const listarAlquiler = async (req, res) => {
 
 export const registrarAlquiler = async (req, res) => {
     try {
-        const error = validationResult(req);
+        /* const error = validationResult(req);
         if(!error.isEmpty()) {
             return res.status(404).json(error.array());
-        }
+        } */
 
         const {valor, fecha, meses, descripcion, interes, cliente, articulo, estado } = req.body;
 
@@ -42,6 +42,20 @@ export const registrarAlquiler = async (req, res) => {
         }
     } catch (e) {
         res.status(500).json({'status': 500, 'message': 'Error. '+e});
+    }
+}
+
+export const buscarAlquiler = async (req,res) => {
+    try {
+        const {id} = req.params;
+        const buscaAlquiler =  await Alquiler.findById(id);
+        if (buscaAlquiler) {
+            res.status(200).json(buscaAlquiler);
+        } else {
+            res.status(404).json({'status': 404, 'message': `No se encontró ningún alquiler con el ID ${id}`});
+        }
+    } catch (e) {
+        res.status(500).json({'status': 500, 'message': `Error. `+e});
     }
 }
 
@@ -68,20 +82,6 @@ export const actualizarAlquiler = async (req,res) => {
     }
 }
 
-export const buscarAlquiler = async (req,res) => {
-    try {
-        const {id} = req.params;
-        const buscaAlquiler =  await Alquiler.findById(id);
-        if (buscaAlquiler) {
-            res.status(200).json(buscaAlquiler);
-        } else {
-            res.status(404).json({'status': 404, 'message': `No se encontró ningún alquiler con el ID ${id}`});
-        }
-    } catch (e) {
-        res.status(500).json({'status': 500, 'message': `Error. `+e});
-    }
-}
-
 export const desactivarAlquiler = async(req,res) => {
     try {
         const {id} = req.params;
@@ -97,7 +97,7 @@ export const desactivarAlquiler = async(req,res) => {
     }
 }
 
-export const activaralquiler = async(req,res) => {
+export const activarAlquiler = async(req,res) => {
     try {
         const {id} = req.params;
         const activaAlquiler = await Alquiler.findById(id);
