@@ -20,11 +20,7 @@ export const listarInteresesPagados = async (req, res) => {
         const interesesPagados = intereses.map(interes => {
             return {
                 cliente: cliente.nombre,
-                /* alquiler: interes.alquiler.descripcion,
-                articulo: interes.articulo, */
                 alquileres,
-                /* mes: interes.mes,
-                valor: interes.valor, */
                 intereses
             };
         });
@@ -95,26 +91,34 @@ export const consultarInteresesPorArticuloPagados = async (req, res) => {
 
         const articulo = await Articulo.findById(id);
         /* console.log(articulo); */
-
         if (!articulo) {
             return res.status(404).json({ 'message': 'Articulo no encontrado.' });
         }
 
         const alquileres = await Alquiler.find({articulo: id});
         /* console.log(alquileres); */
-
         if (alquileres.length === 0) {
             return res.status(404).json({ 'message': 'Alquiler no se encontrado.' });
         }
 
         const interesesPagado = await Interes.find({ alquiler: { $in: alquileres.map( alquiler => alquiler._id) }, estado: true });
         /* console.log(interesesPagado); */
-
         if (interesesPagado.length === 0) {
             return res.status(404).json({ 'message': 'No hay intereses pendientes por pagar para este alquiler.' });
         }
 
-        /* nn */
+        /* const valorPagado = interesesPagado.reduce((total,interes) => {
+            if(estado === true) {
+                total += interes.valor;
+            }
+            return total;
+        }, 0)
+
+        if (valorPagado > 0) {
+            return res.status(200).json({ valorPagado });
+        } else {
+            return res.status(404).json({ 'message': 'No hay intereses pagados para este articulo.' });
+        } */
 
         const mesesInteresesPagados = interesesPagado.map(interes => {
             return {
