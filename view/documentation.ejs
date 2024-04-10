@@ -1,0 +1,2206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
+    <title>Documentación de la API</title>
+</head>
+<body>
+    <h1 class="title">Documentación de la API - Prenderia Mongo</h1>
+    <hr>
+
+
+    <h2>Requerimiento Clientes</h2>
+    <h3>Registrar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">1</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Registrar clientes</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmCliente/javmRegistrar</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite registrar clientes en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>POST</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>{identificacion:1004738034, nombre:'Jose Velez', direccion:'Vereda Chillurco', telefono:'3229499135', fecha_nac:'2003-06-30', password:'322949', estado: true}</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                    "status": 200,
+                    "message": "Se registro el cliente con exito."
+                }
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No se registro el cliente."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Validacion:
+                status: 404
+                [
+                    {
+                        "type": "field",
+                        "value": "",
+                        "msg": "El nombre es obligatorio, y debe de ser menor o igual a 50 caracteres.",
+                        "path": "nombre",
+                        "location": "body"
+                    }
+                ]
+                Requerir Token:
+                status: 401
+                {
+                "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Listar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">2</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Listar clientes</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmCliente/javmListar</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite listar los clientes registrados en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>GET</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                [
+                    {
+                        "_id": "66100de02511d977bedfe6f9",
+                        "identificacion": 1004738034,
+                        "nombre": "Jose Velez",
+                        "direccion": "Vereda Chillurco",
+                        "telefono": "3229499135",
+                        "fecha_nac": "2003-06-30T00:00:00.000Z",
+                        "password": "322949",
+                        "estado": true,
+                        "__v": 0
+                    },
+                    {
+                        "_id": "66100f7b96f782f836879e02",
+                        "identificacion": 1004738034,
+                        "nombre": "Jose",
+                        "direccion": "Vereda Chillurco",
+                        "telefono": "3229499135",
+                        "fecha_nac": "2003-06-30T00:00:00.000Z",
+                        "password": "322949",
+                        "estado": true,
+                        "__v": 0
+                    }
+                ]
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No hay ningún cliente en la base de datos."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Requerir Token:
+                status: 401
+                {
+                "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Buscar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">3</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Buscar clientes</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmCliente/javmBuscar/66100de02511d977bedfe6f9</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite buscar un cliente por el id que este registrado en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>GET</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                    "_id": "66100de02511d977bedfe6f9",
+                    "identificacion": 1004738034,
+                    "nombre": "Jose Velez",
+                    "direccion": "Vereda Chillurco",
+                    "telefono": "3229499135",
+                    "fecha_nac": "2003-06-30T00:00:00.000Z",
+                    "password": "322949",
+                    "estado": true,
+                    "__v": 0
+                }
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No se encontró el cliente con el ID 66100de02511d977bedfe6f9."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Requerir Token:
+                status: 401
+                {
+                "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Actualizar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">4</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Actualizar cliente</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmCliente/javmActualizar/66100de02511d977bedfe6f9</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite actualizar un cliente en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>PUT</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>{identificacion:1004738034, nombre:'Jose Velez', direccion:'Vereda Chillurco', telefono:'3229499135', fecha_nac:'2003-06-30', password:'322949'}</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                    "status": 200,
+                    "message": "Se actualizó el cliente con el ID 66100de02511d977bedfe6f9."
+                }
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No se encontró o no se actalizó el cliente con el ID 66100de02511d977bedfe6f9."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Validacion:
+                status: 404
+                [
+                    {
+                        "type": "field",
+                        "value": "",
+                        "msg": "El nombre es obligatorio, y debe de ser menor o igual a 50 caracteres.",
+                        "path": "nombre",
+                        "location": "body"
+                    }
+                ]
+                Requerir Token:
+                status: 401
+                {
+                "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Desactivar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">5</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Desactivar clientes</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmCliente/javmDesactivar/66100de02511d977bedfe6f9</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite Desactivar un cliente por el id que este registrado en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>PATCH</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                    "status": 200,
+                    "message": "Se desactivo el cliente con el ID 66100de02511d977bedfe6f9."
+                }
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No se encontró el cliente con el ID 66100de02511d977bedfe6f9."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Requerir Token:
+                status: 401
+                {
+                "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Activar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">6</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Activar clientes</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmCliente/javmActivar/66100de02511d977bedfe6f9</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite Activar un cliente por el id que este registrado en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>PATCH</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                    "status": 200,
+                    "message": "Se activo el cliente con el ID 66100de02511d977bedfe6f9."
+                }
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No se encontró el cliente con el ID 66100de02511d977bedfe6f9."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Requerir Token:
+                status: 401
+                {
+                "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Eliminar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">7</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Eliminar clientes</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmCliente/javmEliminar/66100de02511d977bedfe6f9</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite Eliminar un cliente por el id que este registrado en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>DELETE</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                    "status": 200,
+                    "message": "Se elimino el cliente del ID 66100de02511d977bedfe6f9"
+                  }
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No se encontró el cliente con el ID 66100de02511d977bedfe6f9."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Requerir Token:
+                status: 401
+                {
+                    "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+
+
+
+    <h2>Requerimiento Articulo</h2>
+    <h3>Registrar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">1</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Registrar articulo</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmArticulo/javmRegistrar</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite registrar articulos en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>POST</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>{nombre:'Camion', tipo:'Vehiculo', estado: true}</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                    "status": 200,
+                    "message": "Se regisro el artículo."
+                }
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No se registro el articulo."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Validacion:
+                status: 404
+                [
+                    {
+                        "type": "field",
+                        "value": "",
+                        "msg": "El nombre es obligatorio y maximo 20 caracteres.",
+                        "path": "nombre",
+                        "location": "body"
+                    }
+                ]
+                Requerir Token:
+                status: 401
+                {
+                "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Listar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">2</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Listar articulos</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmArticulo/javmListar</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite listar los articulos registrados en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>GET</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                [
+                    {
+                        "_id": "6616adf29ddd0b0739bd0be4",
+                        "nombre": "Camion",
+                        "tipo": "Vehiculo",
+                        "estado": true,
+                        "__v": 0
+                    },
+                    {
+                        "_id": "6616ae4d9ddd0b0739bd0be7",
+                        "nombre": "Collar",
+                        "tipo": "Oro",
+                        "estado": true,
+                        "__v": 0
+                    }
+                ]
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No hay ningún articulo en la base de datos."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Requerir Token:
+                status: 401
+                {
+                "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Buscar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">3</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Buscar articulo</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmArticulo/javmBuscar/6616adf29ddd0b0739bd0be4</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite buscar un articulo por el id que este registrado en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>GET</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                    "_id": "6616adf29ddd0b0739bd0be4",
+                    "nombre": "Camion",
+                    "tipo": "Vehiculo",
+                    "estado": true,
+                    "__v": 0
+                }
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No se encontró el articulo con el ID 6616adf29ddd0b0739bd0be4."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Requerir Token:
+                status: 401
+                {
+                "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Actualizar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">4</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Actualizar articulo</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmArticulo/javmActualizar/6616adf29ddd0b0739bd0be4</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite actualizar un articulo en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>PUT</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>{nombre:'Celular', tipo:'Electrodomesticos'}</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                    "status": 200,
+                    "message": "Se actualizo el artículo con el ID 6616adf29ddd0b0739bd0be4."
+                }
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No se encontró el articulo con el ID 6616adf29ddd0b0739bd0be4."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Validacion:
+                status: 404
+                [
+                    {
+                        "type": "field",
+                        "value": "",
+                        "msg": "El nombre es obligatorio y maximo 20 caracteres.",
+                        "path": "nombre",
+                        "location": "body"
+                    }
+                ]
+                Requerir Token:
+                status: 401
+                {
+                "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Desactivar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">5</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Desactivar articulo</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmArticulo/javmDesactivar/6616adf29ddd0b0739bd0be4</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite Desactivar un articulo por el id que este registrado en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>PATCH</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                    "status": 200,
+                    "message": "Se desactivo el artículo con el ID 6616adf29ddd0b0739bd0be4."
+                }
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No se encontró el articulo con el ID 6616adf29ddd0b0739bd0be4."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Requerir Token:
+                status: 401
+                {
+                "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Activar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">6</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Activar articulo</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmArticulo/javmActivar/6616adf29ddd0b0739bd0be4</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite Activar un articulo por el id que este registrado en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>PATCH</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                    "status": 200,
+                    "message": "Se activo el artículo con el ID 6616adf29ddd0b0739bd0be4."
+                }
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No se encontró el articulo con el ID 6616adf29ddd0b0739bd0be4."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Requerir Token:
+                status: 401
+                {
+                "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Eliminar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">7</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Eliminar clientes</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmArticulo/javmEliminar/6616adf29ddd0b0739bd0be4</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite Eliminar un cliente por el id que este registrado en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>DELETE</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                    "status": 200,
+                    "message": "Se elimino el articulo del ID 6616adf29ddd0b0739bd0be4"
+                  }
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No se encontró el articulo con el ID 6616adf29ddd0b0739bd0be4."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Requerir Token:
+                status: 401
+                {
+                    "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+
+
+
+    <h2>Requerimiento Alquiler</h2>
+    <h3>Registrar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">1</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Registrar alquiler</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmAlquiler/javmRegistrar</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite registrar un alquiler en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>POST</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>{"valor": 80000, "fecha": "2024-01-23", "meses": 2, "descripcion": "Es Bueno", "interes": 2200, "cliente": "6616a701661c27eb654ba991", "articulo": "6616ae4d9ddd0b0739bd0be7", estado: true}</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                    "status": 200,
+                    "message": "Se registro el alquiler."
+                }
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No se registro el alquiler."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Validacion:
+                status: 404
+                [
+                    {
+                        "type": "field",
+                        "value": "",
+                        "msg": "La descripcion es nesesario y maximo de 200 caracteres.",
+                        "path": "descripcion",
+                        "location": "body"
+                    }
+                ]
+                Requerir Token:
+                status: 401
+                {
+                "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Listar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">2</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Listar alquiler</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmAlquiler/javmListar</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite listar los alquileres registrados en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>GET</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                [
+                    {
+                        "_id": "6616b29bfa64c3260873e3bc",
+                        "valor": 80000,
+                        "fecha": "2024-01-23T00:00:00.000Z",
+                        "meses": 2,
+                        "descripcion": "Es Bueno",
+                        "interes": 2200,
+                        "cliente": "6616a65c227bbcba37f84778",
+                        "articulo": "6616adf29ddd0b0739bd0be4",
+                        "estado": true,
+                        "__v": 0
+                    },
+                    {
+                        "_id": "6616b4053518f992f1d957c7",
+                        "valor": 20000,
+                        "fecha": "2024-01-23T00:00:00.000Z",
+                        "meses": 3,
+                        "descripcion": "Es buena marca",
+                        "interes": 1800,
+                        "cliente": "6616a701661c27eb654ba991",
+                        "articulo": "6616ae4d9ddd0b0739bd0be7",
+                        "estado": true,
+                        "__v": 0
+                    }
+                ]
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No hay ningún alquiler en la base de datos."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Requerir Token:
+                status: 401
+                {
+                "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Buscar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">3</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Buscar alquiler</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmAlquiler/javmBuscar/6616b29bfa64c3260873e3bc</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite buscar un alquiler por el id que este registrado en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>GET</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                    "_id": "6616b29bfa64c3260873e3bc",
+                    "valor": 80000,
+                    "fecha": "2024-01-23T00:00:00.000Z",
+                    "meses": 2,
+                    "descripcion": "Es Bueno",
+                    "interes": 2200,
+                    "cliente": "6616a65c227bbcba37f84778",
+                    "articulo": "6616adf29ddd0b0739bd0be4",
+                    "estado": true,
+                    "__v": 0
+                }
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No se encontró el alquiler con el ID 6616b29bfa64c3260873e3bc."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Requerir Token:
+                status: 401
+                {
+                "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Actualizar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">4</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Actualizar alquiler</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmAlquiler/javmActualizar/6616b29bfa64c3260873e3bc</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite actualizar un alquiler en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>PUT</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>{"valor": 82000, "fecha": "2024-01-22", "meses": 2, "descripcion": "Es bastante bueno", "interes": 2400, "cliente": "6616a701661c27eb654ba991", "articulo": "6616ae4d9ddd0b0739bd0be7"}</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                    "status": 200,
+                    "message": "Se actualizo el Alquiler con el ID 6616b29bfa64c3260873e3bc"
+                }
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No se encontró el alquiler con el ID 6616b29bfa64c3260873e3bc."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Validacion:
+                status: 404
+                [
+                    {
+                        "type": "field",
+                        "value": "",
+                        "msg": "El nombre es obligatorio, y debe de ser menor o igual a 50 caracteres.",
+                        "path": "nombre",
+                        "location": "body"
+                    }
+                ]
+                Requerir Token:
+                status: 401
+                {
+                "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Desactivar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">5</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Desactivar alquiler</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmAlquiler/javmDesactivar/6616b29bfa64c3260873e3bc</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite Desactivar un alquiler por el id que este registrado en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>PATCH</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                    "status": 200,
+                    "message": "Se desactivo el alquiler del ID 6616b29bfa64c3260873e3bc"
+                }
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No se encontró el alquiler con el ID 6616b29bfa64c3260873e3bc."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Requerir Token:
+                status: 401
+                {
+                "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Activar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">6</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Activar alquiler</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmAlquiler/javmActivar/6616b29bfa64c3260873e3bc</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite Activar un alquiler por el id que este registrado en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>PATCH</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                    "status": 200,
+                    "message": "Se activo el alquiler del ID 6616b29bfa64c3260873e3bc"
+                }
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No se encontró el alquiler con el ID 6616b29bfa64c3260873e3bc."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Requerir Token:
+                status: 401
+                {
+                "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Eliminar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">7</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Eliminar alquiler</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmAlquiler/javmEliminar/6616b29bfa64c3260873e3bc</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite Eliminar un alquiler por el id que este registrado en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>DELETE</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                    "status": 200,
+                    "message": "Se elimino el alquiler del ID 6616b29bfa64c3260873e3bc"
+                  }
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No se encontró el alquiler con el ID 6616b29bfa64c3260873e3bc."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Requerir Token:
+                status: 401
+                {
+                    "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+
+    
+
+    <h2>Requerimiento Interes</h2>
+    <h3>Registrar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">1</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Registrar interes</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmInteres/javmRegistrar</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite registrar un interes en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>POST</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>{"mes": 2, "fecha": "2024-03-24", "valor": 86800, "alquiler": "6616b29bfa64c3260873e3bc", estado: true}</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                    "status": 200,
+                    "message": "Se registro el interes."
+                }
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No se registro el interes."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Validacion:
+                status: 404
+                [
+                    {
+                        "type": "field",
+                        "value": null,
+                        "msg": "La fecha es obligatorio.",
+                        "path": "fecha",
+                        "location": "body"
+                    }
+                ]
+                Requerir Token:
+                status: 401
+                {
+                "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Listar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">2</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Listar interes</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmInteres/javmListar</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite listar los intereses registrados en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>GET</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                [
+                    {
+                        "_id": "6616b808061b5aec79bde90e",
+                        "mes": 2,
+                        "fecha": "2024-03-24T00:00:00.000Z",
+                        "valor": 86800,
+                        "alquiler": "6616b29bfa64c3260873e3bc",
+                        "estado": true,
+                        "__v": 0
+                    },
+                    {
+                        "_id": "6616bce8061b5aec79bde919",
+                        "mes": 3,
+                        "fecha": "2024-04-25T00:00:00.000Z",
+                        "valor": 25400,
+                        "alquiler": "6616b4053518f992f1d957c7",
+                        "estado": true,
+                        "__v": 0
+                    },
+                    {
+                        "_id": "6616bd45061b5aec79bde91b",
+                        "mes": 4,
+                        "fecha": "2024-01-21T00:00:00.000Z",
+                        "valor": 106000,
+                        "alquiler": "6616b3b63518f992f1d957c4",
+                        "estado": true,
+                        "__v": 0
+                    }
+                ]
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No hay ningún interes en la base de datos."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Requerir Token:
+                status: 401
+                {
+                "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Buscar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">3</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Buscar interes</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmInteres/javmBuscar/6616bce8061b5aec79bde919</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite buscar un interes por el id que este registrado en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>GET</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                    "_id": "6616bce8061b5aec79bde919",
+                    "mes": 3,
+                    "fecha": "2024-04-25T00:00:00.000Z",
+                    "valor": 25400,
+                    "alquiler": "6616b4053518f992f1d957c7",
+                    "estado": true,
+                    "__v": 0
+                }
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No se encontró el interes con el ID 6616bce8061b5aec79bde919."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Requerir Token:
+                status: 401
+                {
+                "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Actualizar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">4</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Actualizar interes</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmInteres/javmActualizar/6616bce8061b5aec79bde919</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite actualizar un interes en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>PUT</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>{"mes": 3, "fecha": "2024-04-25", "valor": 25500, "alquiler": "6616b4053518f992f1d957c7"}</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                    "status": 200,
+                    "message": "Se actualizo el interes con el ID 6616bce8061b5aec79bde919"
+                }
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No se encontró el interes con el ID 6616bce8061b5aec79bde919."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Validacion:
+                status: 404
+                [
+                    {
+                        "type": "field",
+                        "value": null,
+                        "msg": "La fecha es obligatorio.",
+                        "path": "fecha",
+                        "location": "body"
+                    }
+                ]
+                Requerir Token:
+                status: 401
+                {
+                "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Desactivar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">5</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Desactivar interes</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmInteres/javmDesactivar/6616bce8061b5aec79bde919</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite Desactivar un interes por el id que este registrado en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>PATCH</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                    "status": 200,
+                    "message": "Se desactivo el interes del ID 6616bce8061b5aec79bde919"
+                  }
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No se encontró el interes con el ID 6616bce8061b5aec79bde919."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Requerir Token:
+                status: 401
+                {
+                "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Activar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">6</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Activar interes</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmInteres/javmActivar/6616bce8061b5aec79bde919</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite Activar un interes por el id que este registrado en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>PATCH</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                    "status": 200,
+                    "message": "Se activo el interes del ID 6616bce8061b5aec79bde919"
+                }
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No se encontró el interes con el ID 6616bce8061b5aec79bde919."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Requerir Token:
+                status: 401
+                {
+                "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Eliminar</h3>
+    <table>
+        <tr>
+            <td class="td-1">NÚMERO</td>
+            <td class="td-2">7</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Eliminar interes</td>
+        </tr>
+        <tr>
+            <td>URI</td>
+            <td>/javmInteres/javmEliminar/6616bce8061b5aec79bde919</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite Eliminar un interes por el id que este registrado en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>DELETE</td>
+        </tr>
+        <tr>
+            <td>TOKEN</td>
+            <td>Token</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                    "status": 200,
+                    "message": "Se elimino el interes del ID 6616bce8061b5aec79bde919"
+                  }
+                Incorrecto:
+                Status:{
+                    status: 404,
+                    message: "No se encontró el interes con el ID 6616bce8061b5aec79bde919."
+                }
+                Error: 
+                status: 500,
+                body:{
+                    status:500,message:"Error. "+e
+                }
+                Requerir Token:
+                status: 401
+                {
+                    "message": "Se requiere el token."
+                }
+                Validar Token:
+                status: 401
+                {
+                "message": "Token incorrecto."
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="td-3">DESARROLLADOR</td>
+            <td class="td-4">JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+    </table>
+</body>
+</html>

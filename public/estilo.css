@@ -1,0 +1,30 @@
+body {
+    padding: 0 60px;
+}
+.title {
+    font-size: 32px;
+    animation: pulse 1s infinite;
+}
+@keyframes pulse {
+    0% {transform: scale(1);}
+    50% {transform: scale(1.022);}
+    100% {transform: scale(1);}
+}
+h2 {
+    margin-top: 60px;
+}
+th, td {
+    border: 1px solid indigo;
+}
+.td-1 {
+    border-top-left-radius: 8px;
+}
+.td-2 {
+    border-top-right-radius: 8px
+}
+.td-3 {
+    border-bottom-left-radius: 8px;
+}
+.td-4 {
+    border-bottom-right-radius: 8px
+}
