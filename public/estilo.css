@@ -4,11 +4,11 @@ body {
 }
 .title {
     font-size: 32px;
-    color:  #800000;
+    color: #ff0000;
 }
 h2 {
     margin-top: 60px;
-    color: #ff0000;
+    color: #800000;
 }
 table {
     margin: 16px;
